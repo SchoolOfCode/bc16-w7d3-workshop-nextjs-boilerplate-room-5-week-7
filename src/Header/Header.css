@@ -1,0 +1,21 @@
+* {
+    font-family: "Aleo", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+  
+  .container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+    margin: auto;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .site-header {
+      grid-column-start: 1;
+      grid-column-end: 5;
+      align-self: start;
+    }
+  }

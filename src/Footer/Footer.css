@@ -1,0 +1,22 @@
+footer {
+  display: flex;
+  justify-content: space-between;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  background-color: rgb(238, 238, 238);
+  width: 100%;
+  padding: 20px 30px;
+  margin-top: 20px;
+}
+
+a {
+  color: rgb(0, 0, 0);
+}
+
+@media screen and (min-width: 1024px) {
+  footer {
+    align-self: end;
+    grid-column-start: 1;
+    grid-column-end: 5;
+  }
+}
