@@ -6,23 +6,32 @@
 
 .container {
   display: grid;
-  align-items: center;
-  justify-content: center;
+  grid-template-rows: auto;
+  grid-template-columns: auto;
   max-width: 600px;
-  margin: auto;
+  margin: 20px;
+  padding: 0 20px;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.main-content {
+  justify-content: center;
+
 }
 
 
 
 @media screen and (min-width: 1024px) {
   .container {
-    display: grid;
-    align-items: center;
-    justify-content: center;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto;
     min-width: 1024px;
-    min-height: auto;
-    margin: auto;
+    padding: 0 20px;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+
+
   }
 }
