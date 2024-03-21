@@ -18,15 +18,22 @@
 .card-2,
 .card-3 {
   padding: 20px;
+  width: 300px;
 }
 
 @media screen and (min-width: 1024px) {
   .how-it-works {
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .image-cards {
+    margin: 40px;
     display: flex;
+    justify-content: center;
   }
 
   /* .card-1 {

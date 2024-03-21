@@ -5,7 +5,7 @@ footer {
   grid-column-end: 5;
   background-color: rgb(238, 238, 238);
   margin-top: 20px;
-  padding: 20px 80px;
+  padding: 20px;
 }
 
 a {
@@ -15,7 +15,10 @@ a {
 @media screen and (min-width: 1024px) {
   footer {
     align-self: end;
-    grid-column-start: 1;
-    grid-column-end: 5;
+    justify-content: space-between;
+    display: flex; 
+    padding: 20px; 
+    /* /* grid-column-start: 1; 
+    grid-column-end: 5; */
   }
 }
