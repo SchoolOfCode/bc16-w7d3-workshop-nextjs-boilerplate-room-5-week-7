@@ -18,14 +18,18 @@ function Header() {
     <header className="site-header">
       <div className="flex-wrapper">
         <h1 className="site-title">🔥 Fireplace Palace</h1>
-      
+
         <nav className="navbar">
           <button
             className="toggle"
             onClick={() => setNavbarOpen((prev) => !prev)}
           >
             {navbarOpen ? (
-              <Image class="hamburgerImg" src={hamburgerClosed} alt="navclosed" />
+              <Image
+                class="hamburgerImg"
+                src={hamburgerClosed}
+                alt="navclosed"
+              />
             ) : (
               <Image class="hamburgerImg" src={hamburger} alt="navopen" />
             )}
