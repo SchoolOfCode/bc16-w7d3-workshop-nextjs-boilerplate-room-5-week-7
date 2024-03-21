@@ -1,18 +1,17 @@
 .mike-and-mandy {
-    background-color: rgb(240, 145, 26);
-    padding: 60px 20px;
-  }
-  
-  .meetTitle,
-  .mandmTitle {
-    font-size: 36px;
-  }
-  
-  .titles {
-    font-size: 30px;
-  }
-  
-  .card {
-    margin: 40px auto;
-  }
-  
+  background-color: rgb(240, 145, 26);
+  padding: 60px 20px;
+}
+
+.meetTitle,
+.mandmTitle {
+  font-size: 36px;
+}
+
+.titles {
+  font-size: 30px;
+}
+
+.card {
+  margin: 40px auto;
+}
