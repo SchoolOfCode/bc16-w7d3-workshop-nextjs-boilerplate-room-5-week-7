@@ -1,0 +1,14 @@
+.trusted {
+    text-align: center;
+    max-width: 600px;
+}
+
+.trusted-para {
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-evenly;
+}

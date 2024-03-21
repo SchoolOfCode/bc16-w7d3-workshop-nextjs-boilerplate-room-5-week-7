@@ -9,10 +9,12 @@ Objectives:
 
 MVP Plan:
 
-1. Create a plan
-2. Study Loz's API documentation and work out how to use it
+1. Create a plan ✅
+2. Study Loz's API documentation and work out how to use it ✅
 3. Break down the new component for mobile view first
 4. Plan each section of the build
+    - Make folder called Trusted
+    - Make jsx and css files within folder
 5. Follow plan to build the mobile version
 6. Test as we go
 7. Implement the API once the code for the mobile site is working
@@ -31,6 +33,8 @@ Fireplace Palace API:
 Usage:
 To fetch reviews, make a GET request to /reviews with a query parameter specifying the country. For example:
 https://seal-app-336e8.ondigitalocean.app/reviews?country=scotland
+https://seal-app-336e8.ondigitalocean.app/reviews?country=england
+https://seal-app-336e8.ondigitalocean.app/reviews?country=wales
 
 Valid countries are England, Scotland, and Wales. The country parameter is case-insensitive.
 Response Format:

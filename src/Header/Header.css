@@ -16,7 +16,25 @@
   grid-column-start: 1;
   grid-column-end: 5;
   align-self: start;
+  padding: 0 80px;
 }
+
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+.hamburgerImg {
+  width: 25px;
+  height: 25px;
+}
+
+.toggle {
+ 
+}
+
 
 @media screen and (min-width: 1024px) {
   .site-header {
