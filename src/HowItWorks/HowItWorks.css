@@ -6,26 +6,30 @@
   margin: auto;
 }
 
+.how-it-works h3 {
+  font-size: 24px;
+}
+
 .img-subheading {
   font-weight: bold;
 }
 
-.card-1, .card-2, .card-3 {
-padding: 20px
+.card-1,
+.card-2,
+.card-3 {
+  padding: 20px;
 }
 
 @media screen and (min-width: 1024px) {
-
-.how-it-works{
-margin: auto;
-}
+  .how-it-works {
+    margin: auto;
+  }
 
   .image-cards {
-      display: flex;
+    display: flex;
+  }
 
-    }
-  
-    /* .card-1 {
+  /* .card-1 {
       grid-column: 1;
       grid-row: 4;
     }
@@ -39,4 +43,4 @@ margin: auto;
       grid-column: 3;
       grid-row: 4;
     } */
-}    
+}

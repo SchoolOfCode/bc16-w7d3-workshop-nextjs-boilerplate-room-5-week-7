@@ -14,35 +14,49 @@ function Header() {
     setNavbarOpen(!navbarOpen);
   };
 
+  const handleLinkClick = () => {
+    setNavbarOpen(false);
+  };
+
   return (
     <header className="site-header">
       <div className="flex-wrapper">
         <h1 className="site-title">🔥 Fireplace Palace</h1>
 
         <nav className="navbar">
-          <button
-            className="toggle"
-            onClick={() => setNavbarOpen((prev) => !prev)}
-          >
-            {navbarOpen ? (
-              <Image
-                class="hamburgerImg"
-                src={hamburgerClosed}
-                alt="navclosed"
-              />
-            ) : (
-              <Image class="hamburgerImg" src={hamburger} alt="navopen" />
-            )}
+          <button className="mobile-menu-toggle" onClick={toggle}>
+            <Image className="hamburgerImg" src={hamburger} alt="navopen"></Image>
           </button>
+          {navbarOpen ? (
+            <div className="menu-open">
+              <button onClick={toggle}>
+                <Image className="hamburgerImg" src={hamburgerClosed} alt="navclosed"></Image>
+              </button>
 
-          <ul>
-            <li>
-              <Link href="/">Home</Link>
-            </li>
-            <li>
-              <Link href="/founders">Meet the founders</Link>
-            </li>
-          </ul>
+              <ul>
+                <li>
+                  <Link href="/" onClick={handleLinkClick}>
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/founders" onClick={handleLinkClick}>
+                    Meet the founders
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          ) : null}
+          <div className="desktop-links">
+            <ul>
+              <li>
+                <Link href="/">Home</Link>
+              </li>
+              <li>
+                <Link href="/founders">Meet the founders</Link>
+              </li>
+            </ul>
+          </div>
         </nav>
       </div>
     </header>
