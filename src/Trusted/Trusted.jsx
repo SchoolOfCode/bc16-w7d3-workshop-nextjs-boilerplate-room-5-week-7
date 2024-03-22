@@ -21,6 +21,15 @@ function Trusted() {
   }, [country]);
   
 
+
+  // function MyButton() {
+  //   const [isActive, setIsActive] = useState(false);
+  
+  //   const handleClick = () => {
+  //     setIsActive(!isActive);
+  //   };
+
+
   return (
     <section className="trusted">
       <h1>Trusted.</h1>
@@ -29,9 +38,9 @@ function Trusted() {
         country to see the latest review:
       </p>
       <div className="button-container">
-        <button onClick={() => setCountry("england")} type="button">England</button>
-        <button onClick={() => setCountry("wales")} type="button">Wales</button>
-        <button onClick={() => setCountry("scotland")} type="button">Scotland</button>
+        <button className="reviewButton" onClick={() => setCountry("england")} type="button">England</button>
+        <button className="reviewButton" onClick={() => setCountry("wales")} type="button">Wales</button>
+        <button className="reviewButton" onClick={() => setCountry("scotland")} type="button">Scotland</button>
       </div>
       {items.map((item, index) => {
   console.log(item);
@@ -43,6 +52,10 @@ function Trusted() {
       <p className="reviewer">{item.author} - {item.location}</p>
     </div>
   );
+
+
+
+
 })}
 
 
@@ -51,3 +64,4 @@ function Trusted() {
 }
 
 export default Trusted;
+
