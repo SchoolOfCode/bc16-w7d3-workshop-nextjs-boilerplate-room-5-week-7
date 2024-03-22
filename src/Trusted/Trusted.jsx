@@ -4,6 +4,11 @@ import { useState, useEffect } from "react";
 import "./Trusted.css";
 
 
+// Set useState
+// fetch with useEffect
+// Amend buttons
+// Map through API data 
+
 
 
 function Trusted() {
@@ -20,15 +25,6 @@ function Trusted() {
       });
   }, [country]);
   
-
-
-  // function MyButton() {
-  //   const [isActive, setIsActive] = useState(false);
-  
-  //   const handleClick = () => {
-  //     setIsActive(!isActive);
-  //   };
-
 
   return (
     <section className="trusted">
