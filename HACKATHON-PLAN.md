@@ -29,6 +29,18 @@ MVP Plan:
 - Review any styling and media queries
 - Create our own API
 
+
+
+
+
+
+
+
+
+
+
+
+
 Fireplace Palace API:
 
 Usage:

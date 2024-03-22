@@ -7,7 +7,7 @@ import "./Trusted.css";
 
 
 function Trusted() {
-  const [country, setCountry] = useState("england");
+  const [country, setCountry] = useState("");
   const [items, setItems] = useState([]);
 
   useEffect(() => {

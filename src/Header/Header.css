@@ -53,6 +53,12 @@ ul {
 
 .menuLink {
   font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+}
+
+.menuLink:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .desktop-links {
