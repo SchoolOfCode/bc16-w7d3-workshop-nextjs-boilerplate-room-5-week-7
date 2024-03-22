@@ -33,14 +33,14 @@ function Header() {
                 <Image className="hamburgerImg" src={hamburgerClosed} alt="navclosed"></Image>
               </button>
 
-              <ul>
+              <ul className="menuList">
                 <li>
-                  <Link href="/" onClick={handleLinkClick}>
+                  <Link className="menuLink" href="/" onClick={handleLinkClick}>
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link href="/founders" onClick={handleLinkClick}>
+                  <Link className="menuLink" href="/founders" onClick={handleLinkClick}>
                     Meet the founders
                   </Link>
                 </li>
