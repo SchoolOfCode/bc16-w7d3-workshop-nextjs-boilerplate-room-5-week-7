@@ -13,7 +13,9 @@ export default function FoundersPage() {
         <h2 className="mandmTitle">Mike and Mandy</h2>
         <Image className="foundersImg" src={foundersImg} width={400} height={400} alt="founders-image" />
       </div>
+
       <div className="about">
+
         <div className="card">
           <h3 className="titles">Our craftsmanship</h3>
           <p>
@@ -22,6 +24,7 @@ export default function FoundersPage() {
           </p>
           <Image className="foundersImg" src={founders1} alt="founders-image1" />
         </div>
+
         <div className="card">
           <h3 className="titles">Our experience</h3>
           <p>
@@ -30,6 +33,7 @@ export default function FoundersPage() {
           </p>
           <Image className="foundersImg" src={founders2} alt="founders-image2" />
         </div>
+
         <div className="card">
           <h3 className="titles">Our guarantee</h3>
           <p>
@@ -38,7 +42,8 @@ export default function FoundersPage() {
           </p>
           <Image className="foundersImg" src={founders3} alt="founders-image3" />
         </div>
-      </div>
+        </div>
+
     </section>
   );
 }

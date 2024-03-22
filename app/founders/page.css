@@ -15,3 +15,25 @@
 .card {
   margin: 40px auto;
 }
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media screen and (min-width: 1024px) {
+  .about {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card {
+    margin: 20px;
+    text-align: center;
+    flex-basis: 0;
+    flex-grow: 1;
+  }
+}
