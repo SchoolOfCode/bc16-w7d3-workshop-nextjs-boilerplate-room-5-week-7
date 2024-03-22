@@ -13,10 +13,9 @@ MVP Plan:
 2. Study Loz's API documentation and work out how to use it ✅
 3. Break down the new component for mobile view first ✅
 4. Plan each section of the build ✅
-   - Make folder called Trusted
-   - Make jsx and css files within folder
+   - Make folder called Trusted ✅
+   - Make jsx and css files within folder ✅
 5. Follow plan to build the mobile version ✅
-    - Use comments to plan each component
 6. Test as we go ✅
 7. Implement the API once the code for the mobile site is working ✅
 8. Test the API ✅
@@ -26,7 +25,7 @@ MVP Plan:
 
 - Complete our Founders pagepage ✅
 - Complete menu toggle ✅
-- Review any styling and media queries
+- Review any styling and media queries ✅
 - Create our own API
 
 
