@@ -21,6 +21,19 @@
     justify-content: space-evenly; 
 }
 
+.divReviews{
+    background-color: rgb(235,235,235);
+    border-radius: 10px;
+    padding: 5px 20px;
+margin-top: 20px;
+}
+
+.reviewer {
+    text-align: right;
+    text-decoration: underline;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 @media screen and (min-width: 1024px) {
     .trusted {
         text-align: center;
@@ -31,5 +44,8 @@
        margin: auto;
     } 
 
+    .reviewer {
+        text-align: center;
+    }
 
   }

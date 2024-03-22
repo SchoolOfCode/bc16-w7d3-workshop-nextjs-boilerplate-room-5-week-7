@@ -37,8 +37,10 @@ function Trusted() {
   console.log(item);
   return (
     <div key={index}>
-      <h2>{item.author}</h2>
-      <p>{item.text}</p>
+      <div className="divReviews">
+      <p>&quot;{item.text}&quot;</p>
+      </div>
+      <p className="reviewer">{item.author} - {item.location}</p>
     </div>
   );
 })}
