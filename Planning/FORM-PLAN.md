@@ -8,6 +8,7 @@ PLAN
    - Requires are fields filled
    - Add error if missing field
    - No error console log form data
+4. Fix CSS
 
 Stretch Goals
 
