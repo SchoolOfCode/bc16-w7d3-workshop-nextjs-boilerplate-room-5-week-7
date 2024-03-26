@@ -1,5 +1,6 @@
 import Image from "next/image";
 import heroMobile from "/Images/hero-mobile.png";
+import Link from "next/link";
 
 import "./Hero.css";
 
@@ -14,7 +15,9 @@ function Hero() {
         </h2>
 
         <p>
-          Book consultation: <span className="phone-number">0121 345 6789</span>
+        <Link className="bookingLink" href="/booking" >
+                    Book Consultation
+                  </Link> 
         </p>
       </div>
     </section>
@@ -26,3 +29,6 @@ export default Hero;
 {
   /* <img className="hero-img" src={heroMobile} /> */
 }
+
+
+
