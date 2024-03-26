@@ -30,10 +30,15 @@ function ContactForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    // e.target.reset();
-
     console.log(newContact);
+    setNewContact({
+      fullName: "",
+      postcode: "",
+      address: "",
+      city: "",
+      phoneNumber: "",
+      email: "",
+    });
   }
 
   return (
@@ -83,14 +88,7 @@ function ContactForm() {
             <li>
               <label htmlFor="city">City</label>
               <br />
-              <input
-                type="text"
-                id="city"
-                name="city"
-                value={newContact.city}
-                onChange={handleChange}
-                required
-              ></input>
+              <input type="text" id="city" name="city" value={newContact.city} onChange={handleChange} required></input>
             </li>
           </ul>
         </fieldset>
