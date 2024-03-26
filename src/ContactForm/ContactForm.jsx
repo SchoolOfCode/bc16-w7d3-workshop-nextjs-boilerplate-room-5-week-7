@@ -1,61 +1,134 @@
+"use client";
+import { useState } from "react";
 import "./ContactForm.css";
 
-
 function ContactForm() {
+  const [newContact, setNewContact] = useState({
+    fullName: "",
+    postcode: "",
+    address: "",
+    city: "",
+    phoneNumber: "",
+    email: "",
+  });
 
-    
-        return (
-          <>
-          <form>
-<fieldset>
-    
-    <h1>Personal Information</h1>
-<ul>
-    <li>
-    <label htmlFor="fullName">Full Name</label> <br/>
-    <input type="text" id="fullName" name="fullName" required></input>
-    </li>
+  function handleChange(e) {
+    // Extracting the name and value from the event target
+    const name = e.target.name;
+    const value = e.target.value;
 
-    <li>
-    <label htmlFor="postcode">Postcode</label><br/>
-    <input type="text" id="postcode" name="postcode" required></input>
-    </li>
+    // Updating the newContact state
+    setNewContact((prevState) => {
+      // Creating a new object by spreading the previous state
+      const updatedContact = { ...prevState };
+      // Updating the specific property corresponding to the changed input
+      updatedContact[name] = value;
+      // Returning the updated object to set the state
+      return updatedContact;
+    });
+  }
 
-    <li>
-    <label htmlFor="address">House/Flat Number and Street Name</label><br/>
-    <input type="text" id="address" name="address" required></input>
-    </li>
+  function handleSubmit(e) {
+    e.preventDefault();
 
-    <li>
-    <label htmlFor="city">City</label><br/>
-    <input type="text" id="city" name="city" required></input>
-    </li>
-</ul>
-</fieldset>
+    // e.target.reset();
 
+    console.log(newContact);
+  }
 
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <fieldset>
+          <h1>Personal Information</h1>
+          <ul>
+            <li>
+              <label htmlFor="fullName">Full Name</label> <br />
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                value={newContact.fullName}
+                onChange={handleChange}
+                required
+              ></input>
+            </li>
 
-<fieldset>
-    
-    <h1>Contact Information</h1>
-<ul>
-    <li>
-    <label htmlFor="phoneNumber">Phone number</label> <br/>
-    <input type="tel" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" id="phoneNumber" name="phoneNumber"  required></input>
-    </li>
+            <li>
+              <label htmlFor="postcode">Postcode</label>
+              <br />
+              <input
+                type="text"
+                id="postcode"
+                name="postcode"
+                value={newContact.postcode}
+                onChange={handleChange}
+                required
+              ></input>
+            </li>
 
-    <li>
-    <label htmlFor="email">Email Address</label><br/>
-    <input type="email" id="email" name="email" required></input>
-    </li>
-</ul>
-    </fieldset>
+            <li>
+              <label htmlFor="address">House/Flat Number and Street Name</label>
+              <br />
+              <input
+                type="text"
+                id="address"
+                name="address"
+                value={newContact.address}
+                onChange={handleChange}
+                required
+              ></input>
+            </li>
 
-    <button type="submit">Request Design Consultation</button>
+            <li>
+              <label htmlFor="city">City</label>
+              <br />
+              <input
+                type="text"
+                id="city"
+                name="city"
+                value={newContact.city}
+                onChange={handleChange}
+                required
+              ></input>
+            </li>
+          </ul>
+        </fieldset>
 
-          </form>
-          </>
-        );
-      }
-      
-      export default ContactForm;
+        <fieldset>
+          <h1>Contact Information</h1>
+          <ul>
+            <li>
+              <label htmlFor="phoneNumber">Phone number</label> <br />
+              <input
+                type="tel"
+                id="phoneNumber"
+                name="phoneNumber"
+                value={newContact.phoneNumber}
+                onChange={handleChange}
+                required
+              ></input>
+            </li>
+
+            <li>
+              <label htmlFor="email">Email Address</label>
+              <br />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={newContact.email}
+                onChange={handleChange}
+                required
+              ></input>
+            </li>
+          </ul>
+        </fieldset>
+
+        <button type="submit">Request Design Consultation</button>
+      </form>
+    </>
+  );
+}
+
+export default ContactForm;
