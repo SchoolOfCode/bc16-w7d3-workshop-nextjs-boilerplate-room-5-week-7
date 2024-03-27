@@ -49,6 +49,8 @@ function ContactForm() {
       phoneNumber: "",
       email: "",
     });
+
+    setNewError("");
   }
 
   return (
