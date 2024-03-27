@@ -88,9 +88,9 @@ function ContactForm() {
       return;
     }
   
-    // Validate postcode
-    const postcodeResponse = await fetch(`https://api.postcodes.io/postcodes/${state.postcode}/validate`);
-    const postcodeData = await postcodeResponse.json();
+    // Validate postcode 
+    const confirmPostcode = await fetch(`https://api.postcodes.io/postcodes/${state.postcode}/validate`);
+    const postcodeData = await confirmPostcode.json();
   
     if (!postcodeData.result) {
       dispatch({
