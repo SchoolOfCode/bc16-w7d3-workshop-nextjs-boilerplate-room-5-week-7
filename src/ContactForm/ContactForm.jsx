@@ -1,57 +1,140 @@
 "use client";
-import { useState } from "react";
+import { useReducer } from "react";
 import "./ContactForm.css";
 
-function ContactForm() {
-  const [newContact, setNewContact] = useState({
+// Create initial state
+
+  const initialState = {
     fullName: "",
     postcode: "",
     address: "",
     city: "",
     phoneNumber: "",
     email: "",
-  });
+  };
 
-  const [newError, setNewError] = useState("");
+  //Create reducer function 
+
+
+  function reducer(state, action) {
+switch (action.type) {
+  case "updateValue": 
+  return {
+    ...state, 
+    [action.field]: action.value,
+    error: "",
+  };
+  case "resetValue":
+    return initialState; 
+  case "errorValue":
+    return {
+    ...state, 
+error: action.error,
+  };
+  default: 
+  return state;
+}
+  };
+
+
+
+// Create contact form function
+
+function ContactForm() { 
+
+  // initialize state
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+//add console log
+  // create change function 
 
   function handleChange(e) {
-    // Extracting the name and value from the event target
-    const name = e.target.name;
-    const value = e.target.value;
-
-    // Updating the newContact state
-    setNewContact((prevState) => {
-      // Creating a new object by spreading the previous state
-      const updatedContact = { ...prevState };
-      // Updating the specific property corresponding to the changed input
-      updatedContact[name] = value;
-      // Returning the updated object to set the state
-      return updatedContact;
+    dispatch({
+      type: "field",
+      field: e.target.name,
+      payload: e.target.value
     });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
 
-    for (let field in newContact) {
-      if (newContact[field] === "") {
-        setNewError("Error all fields are required - some missing.") 
-        return;
-      }
+// create submit function
+
+function handleSubmit(e) {
+  e.preventDefault();
+
+  for (let field in state) {
+    if (state[field] === "" && field !== "error") {
+      dispatch({
+        type: "error",
+        payload: "Error all fields are required - some missing."
+      });
+      return;
     }
-
-    console.log(newContact);
-    setNewContact({
-      fullName: "",
-      postcode: "",
-      address: "",
-      city: "",
-      phoneNumber: "",
-      email: "",
-    });
-
-    setNewError("");
   }
+
+  console.log(state);
+  dispatch({ type: "resetValue" });
+}
+
+// ❌ WHERE WE LEFT OFF ❌
+return (
+  <form onSubmit={handleSubmit}>
+    
+    <input type="text" name="fullName" value={state.fullName} onChange={handleChange} />
+    
+    {state.error && <div className="error">{state.error}</div>}
+
+    
+    <button type="submit">Submit</button>
+  </form>
+);
+
+
+}
+
+
+
+
+  // const [newError, setNewError] = useState("");
+
+  // function handleChange(e) {
+    
+  //   const name = e.target.name;
+  //   const value = e.target.value;
+
+   
+  //   setNewContact((prevState) => {
+     
+  //     const updatedContact = { ...prevState };
+     
+  //     updatedContact[name] = value;
+      
+  //     return updatedContact;
+  //   });
+  // }
+
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+
+  //   for (let field in newContact) {
+  //     if (newContact[field] === "") {
+  //       setNewError("Error all fields are required - some missing.") 
+  //       return;
+  //     }
+  //   }
+
+  //   console.log(newContact);
+  //   setNewContact({
+  //     fullName: "",
+  //     postcode: "",
+  //     address: "",
+  //     city: "",
+  //     phoneNumber: "",
+  //     email: "",
+  //   });
+
+  //   setNewError("");
+  // }
 
   return (
     <>
