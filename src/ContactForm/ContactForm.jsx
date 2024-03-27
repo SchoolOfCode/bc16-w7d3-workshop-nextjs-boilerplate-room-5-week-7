@@ -111,25 +111,25 @@ function ContactForm() {
           <ul>
             <li>
               <label htmlFor="fullName">Full Name</label> <br />
-              <input type="text" id="fullName" name="fullName" value={state.fullName} onChange={handleChange}></input>
+              <input type="text" id="fullName" name="fullName" value={state.fullName} onChange={handleChange} placeholder="Jane Doe"></input>
             </li>
 
             <li>
               <label htmlFor="postcode">Postcode</label>
               <br />
-              <input type="text" id="postcode" name="postcode" value={state.postcode} onChange={handleChange}></input>
+              <input type="text" id="postcode" name="postcode" value={state.postcode} onChange={handleChange} placeholder="AB12 3CD"></input>
             </li>
 
             <li>
               <label htmlFor="address">House/Flat Number and Street Name</label>
               <br />
-              <input type="text" id="address" name="address" value={state.address} onChange={handleChange}></input>
+              <input type="text" id="address" name="address" value={state.address} onChange={handleChange} placeholder="42 Wallaby Way"></input>
             </li>
 
             <li>
               <label htmlFor="city">City</label>
               <br />
-              <input type="text" id="city" name="city" value={state.city} onChange={handleChange}></input>
+              <input type="text" id="city" name="city" value={state.city} onChange={handleChange} placeholder="Sydney"></input>
             </li>
           </ul>
         </fieldset>
@@ -145,13 +145,14 @@ function ContactForm() {
                 name="phoneNumber"
                 value={state.phoneNumber}
                 onChange={handleChange}
+                placeholder="07123456789"
               ></input>
             </li>
 
             <li>
               <label htmlFor="email">Email Address</label>
               <br />
-              <input type="email" id="email" name="email" value={state.email} onChange={handleChange}></input>
+              <input type="email" id="email" name="email" value={state.email} onChange={handleChange} placeholder="example@email.com"></input>
             </li>
           </ul>
         </fieldset>
