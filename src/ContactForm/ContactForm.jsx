@@ -44,10 +44,18 @@ function reducer(state, action) {
           [action.field]: action.error,
         },
       };
+      case "submission":
+        return {
+          ...state, 
+         isSubmitted: true
+        }
     default:
       return state;
   }
 }
+
+
+
 
 // Create contact form function
 
@@ -90,7 +98,7 @@ function ContactForm() {
         field: "email",
         error: "Invalid email address.",
       });
-      return;
+      
     }
 
     // Validate phone number
@@ -101,6 +109,7 @@ function ContactForm() {
         error: "Invalid phone number.",
       });
       return;
+      
     }
 
     // Validate postcode
@@ -118,29 +127,43 @@ function ContactForm() {
       return;
     }
 
-    for (let field in state) {
-      if (state[field] === "" && field !== "error") {
-        dispatch({
-          type: "errorValue",
-          field: "errors",
-          error: "All fields are required - some missing.",
-        });
-        return;
-      }
-    }
 
     console.log(state);
     dispatch({ type: "resetValue" });
+
+    // Requesting...
+
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    dispatch({ type: 'DONE' });
+
+     // Succesful submission 
+
+// if (state.isSubmitted) {
+//     return <div><p>Thank you for your submission! We will get back to you shortly.</p></div>
+//     }
+
+    dispatch({ type: 'submission' })
+
   }
 
   return (
     <>
+
+{/* 
+❌ Up to line 156*/}
+<div>
+      {state.isSubmitted ? (
+        <div>Thank you for your submission! We will get back to you shortly.</div>
+      ) : ( 
+
+  
       <form onSubmit={handleSubmit}>
         <h1>Personal Information</h1>
         <fieldset>
           <ul>
             <li>
-              <label htmlFor="fullName">Full Name</label> <br />
+              <label htmlFor="fullName">Full Name*</label> <br />
               <input
                 type="text"
                 id="fullName"
@@ -148,12 +171,14 @@ function ContactForm() {
                 value={state.fullName}
                 onChange={handleChange}
                 placeholder="Jane Doe"
+                className={state.errors.email ? "error-input" : ""}
               ></input>
-              {state.errors.fullName && <small>{state.errors.fullName}</small>}
+              <br/> 
+              {state.errors.fullName && <small className="error">{state.errors.fullName}</small>}
             </li>
 
             <li>
-              <label htmlFor="postcode">Postcode</label>
+              <label htmlFor="postcode">Postcode*</label>
               <br />
               <input
                 type="text"
@@ -162,12 +187,14 @@ function ContactForm() {
                 value={state.postcode}
                 onChange={handleChange}
                 placeholder="AB12 3CD"
+                className={state.errors.email ? "error-input" : ""}
               ></input>
-              {state.errors.postcode && <small>{state.errors.postcode}</small>}
+              <br/> 
+              {state.errors.postcode && <small className="error">{state.errors.postcode}</small>}
             </li>
 
             <li>
-              <label htmlFor="address">House/Flat Number and Street Name</label>
+              <label htmlFor="address">House/Flat Number and Street Name*</label>
               <br />
               <input
                 type="text"
@@ -176,12 +203,14 @@ function ContactForm() {
                 value={state.address}
                 onChange={handleChange}
                 placeholder="42 Wallaby Way"
+                className={state.errors.email ? "error-input" : ""}
               ></input>
-              {state.errors.address && <small>{state.errors.address}</small>}
+              <br/> 
+              {state.errors.address && <small className="error">{state.errors.address}</small>}
             </li>
 
             <li>
-              <label htmlFor="city">City</label>
+              <label htmlFor="city">City*</label>
               <br />
               <input
                 type="text"
@@ -190,8 +219,10 @@ function ContactForm() {
                 value={state.city}
                 onChange={handleChange}
                 placeholder="Sydney"
+                className={state.errors.email ? "error-input" : ""}
               ></input>
-              {state.errors.city && <small>{state.errors.city}</small>}
+              <br/> 
+              {state.errors.city && <small className="error">{state.errors.city}</small>}
             </li>
           </ul>
         </fieldset>
@@ -200,7 +231,7 @@ function ContactForm() {
         <fieldset>
           <ul>
             <li>
-              <label htmlFor="phoneNumber">Phone number</label> <br />
+              <label htmlFor="phoneNumber">Phone number*</label> <br />
               <input
                 type="tel"
                 id="phoneNumber"
@@ -208,14 +239,16 @@ function ContactForm() {
                 value={state.phoneNumber}
                 onChange={handleChange}
                 placeholder="07123456789"
+                className={state.errors.email ? "error-input" : ""}
               ></input>
+              <br/> 
               {state.errors.phoneNumber && (
-                <small>{state.errors.phoneNumber}</small>
+                <small className="error">{state.errors.phoneNumber}</small>
               )}
             </li>
 
             <li>
-              <label htmlFor="email">Email Address</label>
+              <label htmlFor="email">Email Address*</label>
               <br />
               <input
                 type="email"
@@ -224,8 +257,10 @@ function ContactForm() {
                 value={state.email}
                 onChange={handleChange}
                 placeholder="example@email.com"
+                className={state.errors.email ? "error-input" : ""}
               ></input>
-              {state.errors.email && <small>{state.errors.email}</small>}
+              <br/> 
+              {state.errors.email && <small className="error">{state.errors.email}</small>}
             </li>
           </ul>
         </fieldset>
@@ -233,10 +268,15 @@ function ContactForm() {
           <div className="error">{state.errors.errors}</div>
         )}
 
+
         <button className="submit-btn" type="submit">
           Request Design Consultation
         </button>
       </form>
+
+)}
+</div>
+{/* ❌ from line 276 */}
     </>
   );
 }
