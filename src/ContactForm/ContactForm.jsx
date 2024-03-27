@@ -67,28 +67,39 @@ function ContactForm() {
 
   // create submit function
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-
+  
     // Validate email
-  if (!validateEmail(state.email)) {
-    dispatch({
-      type: "errorValue",
-      error: "Error: Invalid email address.",
-    });
-    return;
-  }
-
-  // Validate phone number
-  if (!validatePhoneNum(state.phoneNumber)) {
-    dispatch({
-      type: "errorValue",
-      error: "Error: Invalid phone number.",
-    });
-    return;
-  }
-
-
+    if (!validateEmail(state.email)) {
+      dispatch({
+        type: "errorValue",
+        error: "Error: Invalid email address.",
+      });
+      return;
+    }
+  
+    // Validate phone number
+    if (!validatePhoneNum(state.phoneNumber)) {
+      dispatch({
+        type: "errorValue",
+        error: "Error: Invalid phone number.",
+      });
+      return;
+    }
+  
+    // Validate postcode
+    const postcodeResponse = await fetch(`https://api.postcodes.io/postcodes/${state.postcode}/validate`);
+    const postcodeData = await postcodeResponse.json();
+  
+    if (!postcodeData.result) {
+      dispatch({
+        type: "errorValue",
+        error: "Error: England, Wale, Scotoland bookings only.",
+      });
+      return;
+    }
+  
     for (let field in state) {
       if (state[field] === "" && field !== "error") {
         dispatch({
@@ -98,11 +109,10 @@ function ContactForm() {
         return;
       }
     }
-
+  
     console.log(state);
     dispatch({ type: "resetValue" });
   }
-
   return (
     <>
       <form onSubmit={handleSubmit}>
