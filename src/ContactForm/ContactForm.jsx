@@ -48,7 +48,7 @@ function ContactForm() {
     dispatch({
       type: "updateValue",
       field: e.target.name,
-      payload: e.target.value,
+      value: e.target.value,
     });
   }
 
@@ -60,8 +60,8 @@ function ContactForm() {
     for (let field in state) {
       if (state[field] === "" && field !== "error") {
         dispatch({
-          type: "error",
-          payload: "Error all fields are required - some missing.",
+          type: "errorValue",
+          error: "Error all fields are required - some missing.",
         });
         return;
       }
