@@ -19,6 +19,7 @@ const initialState = {
     phoneNumber: "",
     email: "",
   },
+  submitting: false,
 };
 
 //Create reducer function
@@ -48,6 +49,16 @@ function reducer(state, action) {
       return {
         ...state,
         isSubmitted: true,
+      };
+      case "submitBegins":
+      return {
+        ...state,
+        submitting: true,
+      };
+    case "submitEnds":
+      return {
+        ...state,
+        submitting: false,
       };
     default:
       return state;
@@ -87,6 +98,8 @@ function ContactForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    dispatch({ type: "submitStart" });
 
     const emptyFields = Object.entries(state).filter(([key, value]) => key !== "errors" && value === "");
     if (emptyFields.length > 0) {
@@ -133,13 +146,17 @@ function ContactForm() {
     }
 
     console.log(state);
-    dispatch({ type: "resetValue" });
+  
 
     // Requesting...
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    dispatch({ type: "submitEnd" });
 
     dispatch({ type: "DONE" });
+
+    dispatch({ type: "resetValue" });
 
     // Succesful submission
 
@@ -267,7 +284,7 @@ function ContactForm() {
             {state.errors.errors && <div className="error">{state.errors.errors}</div>}
 
             <button className="submit-btn" type="submit">
-              Request Design Consultation
+            {state.submitting ? "Requesting..." : "Request Design Consultation"}
             </button>
           </form>
         )}
