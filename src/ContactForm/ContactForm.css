@@ -32,4 +32,6 @@ li {
 
 label {
     font-size: 18px;
+    display: inline-block;
+    margin-bottom: 5px;
 }
