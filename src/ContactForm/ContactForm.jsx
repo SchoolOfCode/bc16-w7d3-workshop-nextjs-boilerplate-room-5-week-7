@@ -150,7 +150,6 @@ function ContactForm() {
 
     // Requesting...
 
-    // await new Promise((resolve) => setTimeout(resolve, 2000));
 
     dispatch({ type: "submitEnd" });
 
