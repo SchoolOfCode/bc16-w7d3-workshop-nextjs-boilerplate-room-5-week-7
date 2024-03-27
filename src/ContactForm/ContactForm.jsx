@@ -128,14 +128,14 @@ function ContactForm() {
     }
 
 
-    console.log(state);
-    dispatch({ type: "resetValue" });
-
     // Requesting...
 
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // await new Promise(resolve => setTimeout(resolve, 2000));
 
-    dispatch({ type: 'DONE' });
+    // dispatch({ type: 'DONE' });
+
+    console.log(state);
+    dispatch({ type: "resetValue" });
 
      // Succesful submission 
 
