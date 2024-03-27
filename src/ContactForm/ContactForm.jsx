@@ -132,7 +132,7 @@ function ContactForm() {
       return;
     }
 
-    // console.log(state);
+    console.log(state);
     dispatch({ type: "resetValue" });
 
     // Requesting...
