@@ -4,111 +4,98 @@ import "./ContactForm.css";
 
 // Create initial state
 
-  const initialState = {
-    fullName: "",
-    postcode: "",
-    address: "",
-    city: "",
-    phoneNumber: "",
-    email: "",
-  };
+const initialState = {
+  fullName: "",
+  postcode: "",
+  address: "",
+  city: "",
+  phoneNumber: "",
+  email: "",
+};
 
-  //Create reducer function 
+//Create reducer function
 
-
-  function reducer(state, action) {
-switch (action.type) {
-  case "updateValue": 
-  return {
-    ...state, 
-    [action.field]: action.value,
-    error: "",
-  };
-  case "resetValue":
-    return initialState; 
-  case "errorValue":
-    return {
-    ...state, 
-error: action.error,
-  };
-  default: 
-  return state;
+function reducer(state, action) {
+  switch (action.type) {
+    case "updateValue":
+      return {
+        ...state,
+        [action.field]: action.value,
+        error: "",
+      };
+    case "resetValue":
+      return initialState;
+    case "errorValue":
+      return {
+        ...state,
+        error: action.error,
+      };
+    default:
+      return state;
+  }
 }
-  };
-
-
 
 // Create contact form function
 
-function ContactForm() { 
-
+function ContactForm() {
   // initialize state
 
   const [state, dispatch] = useReducer(reducer, initialState);
-//add console log
-  // create change function 
+  //add console log
+  // create change function
 
   function handleChange(e) {
     dispatch({
       type: "field",
       field: e.target.name,
-      payload: e.target.value
+      payload: e.target.value,
     });
   }
 
+  // create submit function
 
-// create submit function
+  function handleSubmit(e) {
+    e.preventDefault();
 
-function handleSubmit(e) {
-  e.preventDefault();
-
-  for (let field in state) {
-    if (state[field] === "" && field !== "error") {
-      dispatch({
-        type: "error",
-        payload: "Error all fields are required - some missing."
-      });
-      return;
+    for (let field in state) {
+      if (state[field] === "" && field !== "error") {
+        dispatch({
+          type: "error",
+          payload: "Error all fields are required - some missing.",
+        });
+        return;
+      }
     }
+
+    console.log(state);
+    dispatch({ type: "resetValue" });
   }
 
-  console.log(state);
-  dispatch({ type: "resetValue" });
-}
+  // ❌ WHERE WE LEFT OFF ❌
+  // return (
+  //   <form onSubmit={handleSubmit}>
 
-// ❌ WHERE WE LEFT OFF ❌
-return (
-  <form onSubmit={handleSubmit}>
-    
-    <input type="text" name="fullName" value={state.fullName} onChange={handleChange} />
-    
-    {state.error && <div className="error">{state.error}</div>}
+  //     <input type="text" name="fullName" value={state.fullName} onChange={handleChange} />
 
-    
-    <button type="submit">Submit</button>
-  </form>
-);
+  //     {state.error && <div className="error">{state.error}</div>}
 
-
-}
-
-
-
+  //     <button type="submit">Submit</button>
+  //   </form>
+  // );
 
   // const [newError, setNewError] = useState("");
 
   // function handleChange(e) {
-    
+
   //   const name = e.target.name;
   //   const value = e.target.value;
 
-   
   //   setNewContact((prevState) => {
-     
+
   //     const updatedContact = { ...prevState };
-     
+
   //     updatedContact[name] = value;
-      
+
   //     return updatedContact;
   //   });
   // }
@@ -118,7 +105,7 @@ return (
 
   //   for (let field in newContact) {
   //     if (newContact[field] === "") {
-  //       setNewError("Error all fields are required - some missing.") 
+  //       setNewError("Error all fields are required - some missing.")
   //       return;
   //     }
   //   }
@@ -144,53 +131,25 @@ return (
           <ul>
             <li>
               <label htmlFor="fullName">Full Name</label> <br />
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                value={newContact.fullName}
-                onChange={handleChange}
-                
-              ></input>
+              <input type="text" id="fullName" name="fullName" value={state.fullName} onChange={handleChange}></input>
             </li>
 
             <li>
               <label htmlFor="postcode">Postcode</label>
               <br />
-              <input
-                type="text"
-                id="postcode"
-                name="postcode"
-                value={newContact.postcode}
-                onChange={handleChange}
-                
-              ></input>
+              <input type="text" id="postcode" name="postcode" value={state.postcode} onChange={handleChange}></input>
             </li>
 
             <li>
               <label htmlFor="address">House/Flat Number and Street Name</label>
               <br />
-              <input
-                type="text"
-                id="address"
-                name="address"
-                value={newContact.address}
-                onChange={handleChange}
-                
-              ></input>
+              <input type="text" id="address" name="address" value={state.address} onChange={handleChange}></input>
             </li>
 
             <li>
               <label htmlFor="city">City</label>
               <br />
-              <input
-                type="text"
-                id="city"
-                name="city"
-                value={newContact.city}
-                onChange={handleChange}
-                
-              ></input>
+              <input type="text" id="city" name="city" value={state.city} onChange={handleChange}></input>
             </li>
           </ul>
         </fieldset>
@@ -204,31 +163,23 @@ return (
                 type="tel"
                 id="phoneNumber"
                 name="phoneNumber"
-                value={newContact.phoneNumber}
+                value={state.phoneNumber}
                 onChange={handleChange}
-                
               ></input>
             </li>
 
             <li>
               <label htmlFor="email">Email Address</label>
               <br />
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={newContact.email}
-                onChange={handleChange}
-                
-              ></input>
+              <input type="email" id="email" name="email" value={state.email} onChange={handleChange}></input>
             </li>
           </ul>
         </fieldset>
-        <div className="error">
-          {newError}
-        </div>
+        {state.error && <div className="error">{state.error}</div>}
 
-        <button className="submit-btn" type="submit">Request Design Consultation</button>
+        <button className="submit-btn" type="submit">
+          Request Design Consultation
+        </button>
       </form>
     </>
   );
