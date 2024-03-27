@@ -52,10 +52,42 @@ function ContactForm() {
     });
   }
 
+  // Validate email address
+  function validateEmail(email) {
+    const emailChar = /\S+@\S+\.\S+/;
+    return emailChar.test(String(email).toLowerCase());
+  }
+
+  // Validate phone numbers
+  function validatePhoneNum(phoneNumber) {
+    const numberContent = /^\d{11}$/;
+    return numberContent.test(phoneNumber);
+  }
+
+
   // create submit function
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    // Validate email
+  if (!validateEmail(state.email)) {
+    dispatch({
+      type: "errorValue",
+      error: "Error: Invalid email address.",
+    });
+    return;
+  }
+
+  // Validate phone number
+  if (!validatePhoneNum(state.phoneNumber)) {
+    dispatch({
+      type: "errorValue",
+      error: "Error: Invalid phone number.",
+    });
+    return;
+  }
+
 
     for (let field in state) {
       if (state[field] === "" && field !== "error") {
