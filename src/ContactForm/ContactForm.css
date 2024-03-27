@@ -25,3 +25,11 @@ fieldset {
     text-align: center;
     margin-top: 30px;
 }
+
+li {
+    margin-bottom: 30px;
+}
+
+label {
+    font-size: 18px;
+}
