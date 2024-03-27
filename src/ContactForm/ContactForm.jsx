@@ -80,7 +80,7 @@ function ContactForm() {
 
   // create submit function
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     // Validate email
@@ -102,6 +102,19 @@ function ContactForm() {
       });
       return;
     }
+
+     // Validate postcode 
+     const confirmPostcode = await fetch(`https://api.postcodes.io/postcodes/${state.postcode}/validate`);
+     const postcodeData = await confirmPostcode.json();
+   
+     if (!postcodeData.result) {
+       dispatch({
+         type: "errorValue",
+         field: "postcode",
+         error: "Error: England, Wales, Scotland bookings only.",
+       });
+       return;
+     }
 
     for (let field in state) {
       if (state[field] === "" && field !== "error") {
