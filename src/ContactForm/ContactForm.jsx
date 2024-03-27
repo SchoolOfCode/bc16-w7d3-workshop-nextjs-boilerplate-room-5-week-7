@@ -44,8 +44,8 @@ function ContactForm() {
   return (
     <>
       <form onSubmit={handleSubmit}>
+        <h1>Personal Information</h1>
         <fieldset>
-          <h1>Personal Information</h1>
           <ul>
             <li>
               <label htmlFor="fullName">Full Name</label> <br />
@@ -88,13 +88,20 @@ function ContactForm() {
             <li>
               <label htmlFor="city">City</label>
               <br />
-              <input type="text" id="city" name="city" value={newContact.city} onChange={handleChange} required></input>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                value={newContact.city}
+                onChange={handleChange}
+                required
+              ></input>
             </li>
           </ul>
         </fieldset>
 
+        <h1>Contact Information</h1>
         <fieldset>
-          <h1>Contact Information</h1>
           <ul>
             <li>
               <label htmlFor="phoneNumber">Phone number</label> <br />
@@ -122,8 +129,11 @@ function ContactForm() {
             </li>
           </ul>
         </fieldset>
+        <div className="error">
 
-        <button type="submit">Request Design Consultation</button>
+        </div>
+
+        <button className="submit-btn" type="submit">Request Design Consultation</button>
       </form>
     </>
   );
