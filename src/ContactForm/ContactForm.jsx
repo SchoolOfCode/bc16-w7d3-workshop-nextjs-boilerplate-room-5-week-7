@@ -44,18 +44,15 @@ function reducer(state, action) {
           [action.field]: action.error,
         },
       };
-      case "submission":
-        return {
-          ...state, 
-         isSubmitted: true
-        }
+    case "submission":
+      return {
+        ...state,
+        isSubmitted: true,
+      };
     default:
       return state;
   }
 }
-
-
-
 
 // Create contact form function
 
@@ -91,6 +88,18 @@ function ContactForm() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    const emptyFields = Object.entries(state).filter(([key, value]) => key !== "errors" && value === "");
+    if (emptyFields.length > 0) {
+      emptyFields.forEach(([field, _]) => {
+        dispatch({
+          type: "errorValue",
+          field: field,
+          error: `${field.charAt(0).toUpperCase() + field.slice(1)} is required.`,
+        });
+      });
+      return;
+    }
+
     // Validate email
     if (!validateEmail(state.email)) {
       dispatch({
@@ -98,7 +107,6 @@ function ContactForm() {
         field: "email",
         error: "Invalid email address.",
       });
-      
     }
 
     // Validate phone number
@@ -109,13 +117,10 @@ function ContactForm() {
         error: "Invalid phone number.",
       });
       return;
-      
     }
 
     // Validate postcode
-    const confirmPostcode = await fetch(
-      `https://api.postcodes.io/postcodes/${state.postcode}/validate`
-    );
+    const confirmPostcode = await fetch(`https://api.postcodes.io/postcodes/${state.postcode}/validate`);
     const postcodeData = await confirmPostcode.json();
 
     if (!postcodeData.result) {
@@ -127,156 +132,147 @@ function ContactForm() {
       return;
     }
 
-
-    console.log(state);
+    // console.log(state);
     dispatch({ type: "resetValue" });
 
     // Requesting...
 
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    dispatch({ type: 'DONE' });
+    dispatch({ type: "DONE" });
 
-     // Succesful submission 
+    // Succesful submission
 
-// if (state.isSubmitted) {
-//     return <div><p>Thank you for your submission! We will get back to you shortly.</p></div>
-//     }
-
-    dispatch({ type: 'submission' })
-
+    // if (state.isSubmitted) {
+    //     return <div><p>Thank you for your submission! We will get back to you shortly.</p></div>
+    //     }
+    const hasErrors = Object.values(state.errors).some((error) => error !== "");
+    if (!hasErrors) {
+      dispatch({ type: "submission" });
+    }
   }
 
   return (
     <>
-
-{/* 
+      {/* 
 ❌ Up to line 156*/}
-<div>
-      {state.isSubmitted ? (
-        <div>Thank you for your submission! We will get back to you shortly.</div>
-      ) : ( 
+      <div>
+        {state.isSubmitted ? (
+          <div>Thank you for your submission! We will get back to you shortly.</div>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <h1>Personal Information</h1>
+            <fieldset>
+              <ul>
+                <li>
+                  <label htmlFor="fullName">Full Name*</label> <br />
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    value={state.fullName}
+                    onChange={handleChange}
+                    placeholder="Jane Doe"
+                    className={state.errors.email ? "error-input" : ""}
+                  ></input>
+                  <br />
+                  {state.errors.fullName && <small className="error">{state.errors.fullName}</small>}
+                </li>
 
-  
-      <form onSubmit={handleSubmit}>
-        <h1>Personal Information</h1>
-        <fieldset>
-          <ul>
-            <li>
-              <label htmlFor="fullName">Full Name*</label> <br />
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                value={state.fullName}
-                onChange={handleChange}
-                placeholder="Jane Doe"
-                className={state.errors.email ? "error-input" : ""}
-              ></input>
-              <br/> 
-              {state.errors.fullName && <small className="error">{state.errors.fullName}</small>}
-            </li>
+                <li>
+                  <label htmlFor="postcode">Postcode*</label>
+                  <br />
+                  <input
+                    type="text"
+                    id="postcode"
+                    name="postcode"
+                    value={state.postcode}
+                    onChange={handleChange}
+                    placeholder="AB12 3CD"
+                    className={state.errors.email ? "error-input" : ""}
+                  ></input>
+                  <br />
+                  {state.errors.postcode && <small className="error">{state.errors.postcode}</small>}
+                </li>
 
-            <li>
-              <label htmlFor="postcode">Postcode*</label>
-              <br />
-              <input
-                type="text"
-                id="postcode"
-                name="postcode"
-                value={state.postcode}
-                onChange={handleChange}
-                placeholder="AB12 3CD"
-                className={state.errors.email ? "error-input" : ""}
-              ></input>
-              <br/> 
-              {state.errors.postcode && <small className="error">{state.errors.postcode}</small>}
-            </li>
+                <li>
+                  <label htmlFor="address">House/Flat Number and Street Name*</label>
+                  <br />
+                  <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    value={state.address}
+                    onChange={handleChange}
+                    placeholder="42 Wallaby Way"
+                    className={state.errors.email ? "error-input" : ""}
+                  ></input>
+                  <br />
+                  {state.errors.address && <small className="error">{state.errors.address}</small>}
+                </li>
 
-            <li>
-              <label htmlFor="address">House/Flat Number and Street Name*</label>
-              <br />
-              <input
-                type="text"
-                id="address"
-                name="address"
-                value={state.address}
-                onChange={handleChange}
-                placeholder="42 Wallaby Way"
-                className={state.errors.email ? "error-input" : ""}
-              ></input>
-              <br/> 
-              {state.errors.address && <small className="error">{state.errors.address}</small>}
-            </li>
+                <li>
+                  <label htmlFor="city">City*</label>
+                  <br />
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    value={state.city}
+                    onChange={handleChange}
+                    placeholder="Sydney"
+                    className={state.errors.email ? "error-input" : ""}
+                  ></input>
+                  <br />
+                  {state.errors.city && <small className="error">{state.errors.city}</small>}
+                </li>
+              </ul>
+            </fieldset>
 
-            <li>
-              <label htmlFor="city">City*</label>
-              <br />
-              <input
-                type="text"
-                id="city"
-                name="city"
-                value={state.city}
-                onChange={handleChange}
-                placeholder="Sydney"
-                className={state.errors.email ? "error-input" : ""}
-              ></input>
-              <br/> 
-              {state.errors.city && <small className="error">{state.errors.city}</small>}
-            </li>
-          </ul>
-        </fieldset>
+            <h1>Contact Information</h1>
+            <fieldset>
+              <ul>
+                <li>
+                  <label htmlFor="phoneNumber">Phone number*</label> <br />
+                  <input
+                    type="tel"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    value={state.phoneNumber}
+                    onChange={handleChange}
+                    placeholder="07123456789"
+                    className={state.errors.email ? "error-input" : ""}
+                  ></input>
+                  <br />
+                  {state.errors.phoneNumber && <small className="error">{state.errors.phoneNumber}</small>}
+                </li>
 
-        <h1>Contact Information</h1>
-        <fieldset>
-          <ul>
-            <li>
-              <label htmlFor="phoneNumber">Phone number*</label> <br />
-              <input
-                type="tel"
-                id="phoneNumber"
-                name="phoneNumber"
-                value={state.phoneNumber}
-                onChange={handleChange}
-                placeholder="07123456789"
-                className={state.errors.email ? "error-input" : ""}
-              ></input>
-              <br/> 
-              {state.errors.phoneNumber && (
-                <small className="error">{state.errors.phoneNumber}</small>
-              )}
-            </li>
+                <li>
+                  <label htmlFor="email">Email Address*</label>
+                  <br />
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={state.email}
+                    onChange={handleChange}
+                    placeholder="example@email.com"
+                    className={state.errors.email ? "error-input" : ""}
+                  ></input>
+                  <br />
+                  {state.errors.email && <small className="error">{state.errors.email}</small>}
+                </li>
+              </ul>
+            </fieldset>
+            {state.errors.errors && <div className="error">{state.errors.errors}</div>}
 
-            <li>
-              <label htmlFor="email">Email Address*</label>
-              <br />
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={state.email}
-                onChange={handleChange}
-                placeholder="example@email.com"
-                className={state.errors.email ? "error-input" : ""}
-              ></input>
-              <br/> 
-              {state.errors.email && <small className="error">{state.errors.email}</small>}
-            </li>
-          </ul>
-        </fieldset>
-        {state.errors.errors && (
-          <div className="error">{state.errors.errors}</div>
+            <button className="submit-btn" type="submit">
+              Request Design Consultation
+            </button>
+          </form>
         )}
-
-
-        <button className="submit-btn" type="submit">
-          Request Design Consultation
-        </button>
-      </form>
-
-)}
-</div>
-{/* ❌ from line 276 */}
+      </div>
+      {/* ❌ from line 276 */}
     </>
   );
 }
