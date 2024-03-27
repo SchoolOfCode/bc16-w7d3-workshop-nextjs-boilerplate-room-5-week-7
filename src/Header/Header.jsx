@@ -43,6 +43,11 @@ function Header() {
                   <Link className="menuLink" href="/founders" onClick={handleLinkClick}>
                     Meet the founders
                   </Link>
+                  </li>
+                  <li>
+                  <Link className="menuLink" href="/booking" onClick={handleLinkClick}>
+                    Book Consultation
+                  </Link> 
                 </li>
               </ul>
             </div>
