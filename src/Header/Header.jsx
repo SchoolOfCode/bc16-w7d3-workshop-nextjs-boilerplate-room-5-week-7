@@ -60,6 +60,10 @@ function Header() {
               <li>
                 <Link href="/founders">Meet the founders</Link>
               </li>
+
+              <li>
+                <Link href="/booking">Book Consultation</Link>
+              </li>
             </ul>
           </div>
         </nav>

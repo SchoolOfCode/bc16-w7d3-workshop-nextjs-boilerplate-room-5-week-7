@@ -103,18 +103,20 @@ function ContactForm() {
       return;
     }
 
-     // Validate postcode 
-     const confirmPostcode = await fetch(`https://api.postcodes.io/postcodes/${state.postcode}/validate`);
-     const postcodeData = await confirmPostcode.json();
-   
-     if (!postcodeData.result) {
-       dispatch({
-         type: "errorValue",
-         field: "postcode",
-         error: "Error: England, Wales, Scotland bookings only.",
-       });
-       return;
-     }
+    // Validate postcode
+    const confirmPostcode = await fetch(
+      `https://api.postcodes.io/postcodes/${state.postcode}/validate`
+    );
+    const postcodeData = await confirmPostcode.json();
+
+    if (!postcodeData.result) {
+      dispatch({
+        type: "errorValue",
+        field: "postcode",
+        error: "Error: England, Wales, Scotland bookings only.",
+      });
+      return;
+    }
 
     for (let field in state) {
       if (state[field] === "" && field !== "error") {
@@ -139,28 +141,56 @@ function ContactForm() {
           <ul>
             <li>
               <label htmlFor="fullName">Full Name</label> <br />
-              <input type="text" id="fullName" name="fullName" value={state.fullName} onChange={handleChange} placeholder="Jane Doe"></input>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                value={state.fullName}
+                onChange={handleChange}
+                placeholder="Jane Doe"
+              ></input>
               {state.errors.fullName && <small>{state.errors.fullName}</small>}
             </li>
 
             <li>
               <label htmlFor="postcode">Postcode</label>
               <br />
-              <input type="text" id="postcode" name="postcode" value={state.postcode} onChange={handleChange} placeholder="AB12 3CD"></input>
+              <input
+                type="text"
+                id="postcode"
+                name="postcode"
+                value={state.postcode}
+                onChange={handleChange}
+                placeholder="AB12 3CD"
+              ></input>
               {state.errors.postcode && <small>{state.errors.postcode}</small>}
             </li>
 
             <li>
               <label htmlFor="address">House/Flat Number and Street Name</label>
               <br />
-              <input type="text" id="address" name="address" value={state.address} onChange={handleChange} placeholder="42 Wallaby Way"></input>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                value={state.address}
+                onChange={handleChange}
+                placeholder="42 Wallaby Way"
+              ></input>
               {state.errors.address && <small>{state.errors.address}</small>}
             </li>
 
             <li>
               <label htmlFor="city">City</label>
               <br />
-              <input type="text" id="city" name="city" value={state.city} onChange={handleChange} placeholder="Sydney"></input>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                value={state.city}
+                onChange={handleChange}
+                placeholder="Sydney"
+              ></input>
               {state.errors.city && <small>{state.errors.city}</small>}
             </li>
           </ul>
@@ -179,18 +209,29 @@ function ContactForm() {
                 onChange={handleChange}
                 placeholder="07123456789"
               ></input>
-              {state.errors.phoneNumber && <small>{state.errors.phoneNumber}</small>}
+              {state.errors.phoneNumber && (
+                <small>{state.errors.phoneNumber}</small>
+              )}
             </li>
 
             <li>
               <label htmlFor="email">Email Address</label>
               <br />
-              <input type="email" id="email" name="email" value={state.email} onChange={handleChange} placeholder="example@email.com"></input>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={state.email}
+                onChange={handleChange}
+                placeholder="example@email.com"
+              ></input>
               {state.errors.email && <small>{state.errors.email}</small>}
             </li>
           </ul>
         </fieldset>
-        {state.errors.errors && <div className="error">{state.errors.errors}</div>}
+        {state.errors.errors && (
+          <div className="error">{state.errors.errors}</div>
+        )}
 
         <button className="submit-btn" type="submit">
           Request Design Consultation
