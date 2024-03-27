@@ -12,6 +12,8 @@ function ContactForm() {
     email: "",
   });
 
+  const [newError, setNewError] = useState("");
+
   function handleChange(e) {
     // Extracting the name and value from the event target
     const name = e.target.name;
@@ -30,6 +32,14 @@ function ContactForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    for (let field in newContact) {
+      if (newContact[field] === "") {
+        setNewError("Error all fields are required - some missing.") 
+        return;
+      }
+    }
+
     console.log(newContact);
     setNewContact({
       fullName: "",
@@ -55,7 +65,7 @@ function ContactForm() {
                 name="fullName"
                 value={newContact.fullName}
                 onChange={handleChange}
-                required
+                
               ></input>
             </li>
 
@@ -68,7 +78,7 @@ function ContactForm() {
                 name="postcode"
                 value={newContact.postcode}
                 onChange={handleChange}
-                required
+                
               ></input>
             </li>
 
@@ -81,7 +91,7 @@ function ContactForm() {
                 name="address"
                 value={newContact.address}
                 onChange={handleChange}
-                required
+                
               ></input>
             </li>
 
@@ -94,7 +104,7 @@ function ContactForm() {
                 name="city"
                 value={newContact.city}
                 onChange={handleChange}
-                required
+                
               ></input>
             </li>
           </ul>
@@ -111,7 +121,7 @@ function ContactForm() {
                 name="phoneNumber"
                 value={newContact.phoneNumber}
                 onChange={handleChange}
-                required
+                
               ></input>
             </li>
 
@@ -124,13 +134,13 @@ function ContactForm() {
                 name="email"
                 value={newContact.email}
                 onChange={handleChange}
-                required
+                
               ></input>
             </li>
           </ul>
         </fieldset>
         <div className="error">
-
+          {newError}
         </div>
 
         <button className="submit-btn" type="submit">Request Design Consultation</button>
