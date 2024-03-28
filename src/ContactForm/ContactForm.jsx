@@ -158,6 +158,8 @@ function ContactForm() {
 
     dispatch({ type: "resetValue" });
 
+    console.log(state);
+
 
     // Succesful submission
 
