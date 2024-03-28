@@ -60,6 +60,7 @@ input {
   .successful-submit {
     text-align: center;
     font-size: 30px;
+    margin: 200px 0;
   }
 
   .fireplace-gif {
