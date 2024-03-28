@@ -149,8 +149,8 @@ function ContactForm() {
   
 
     // Requesting...
-
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // Delay added to show requesting
+    // await new Promise(resolve => setTimeout(resolve, 1000));
 
     dispatch({ type: "submitEnds" });
 
