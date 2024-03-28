@@ -16,8 +16,8 @@ a {
   footer {
     align-self: end;
     justify-content: space-between;
-    display: flex; 
-    padding: 20px; 
+    display: flex;
+    padding: 20px;
     /* /* grid-column-start: 1; 
     grid-column-end: 5; */
   }

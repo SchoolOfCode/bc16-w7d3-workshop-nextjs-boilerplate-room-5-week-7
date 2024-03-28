@@ -50,7 +50,7 @@ function reducer(state, action) {
         ...state,
         isSubmitted: true,
       };
-      case "submitBegins":
+    case "submitBegins":
       return {
         ...state,
         submitting: true,
@@ -101,16 +101,20 @@ function ContactForm() {
 
     dispatch({ type: "submitBegins" });
 
-    const emptyFields = Object.entries(state).filter(([key, value]) => key !== "errors" && value === "");
+    const emptyFields = Object.entries(state).filter(
+      ([key, value]) => key !== "errors" && value === ""
+    );
     if (emptyFields.length > 0) {
       emptyFields.forEach(([field, _]) => {
         dispatch({
           type: "errorValue",
           field: field,
-          error: `${field.charAt(0).toUpperCase() + field.slice(1)} is required.`,
+          error: `${
+            field.charAt(0).toUpperCase() + field.slice(1)
+          } is required.`,
         });
       });
-       dispatch({ type: "submitEnds" }); 
+      dispatch({ type: "submitEnds" });
       return;
     }
 
@@ -131,12 +135,14 @@ function ContactForm() {
         field: "phoneNumber",
         error: "Invalid phone number.",
       });
-       dispatch({ type: "submitEnds" }); 
+      dispatch({ type: "submitEnds" });
       return;
     }
 
     // Validate postcode
-    const confirmPostcode = await fetch(`https://api.postcodes.io/postcodes/${state.postcode}/validate`);
+    const confirmPostcode = await fetch(
+      `https://api.postcodes.io/postcodes/${state.postcode}/validate`
+    );
     const postcodeData = await confirmPostcode.json();
 
     if (!postcodeData.result) {
@@ -145,16 +151,15 @@ function ContactForm() {
         field: "postcode",
         error: "Error: England, Wales, Scotland bookings only.",
       });
-       dispatch({ type: "submitEnds" }); 
+      dispatch({ type: "submitEnds" });
       return;
     }
 
     console.log(state);
-  
 
     // Requesting...
     // Delay added to show requesting
-     await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     dispatch({ type: "submitEnds" });
 
@@ -164,7 +169,7 @@ function ContactForm() {
 
     console.log(state);
 
-     dispatch({ type: "submitEnds" }); 
+    dispatch({ type: "submitEnds" });
 
     // Succesful submission
 
@@ -179,11 +184,17 @@ function ContactForm() {
 
   return (
     <>
-      {/* 
-❌ Up to line 156*/}
       <div>
         {state.isSubmitted ? (
-          <div>Thank you for your submission! We will get back to you shortly.</div>
+          <div className="successful-submit">
+            <p>Thank you for your submission!</p>
+            <div className="fireplace-gif">
+              <a href="https://gifer.com">
+                <iframe src="https://gifer.com/embed/MRnR"></iframe>
+              </a>
+            </div>
+            <p>We will get back to you shortly.</p>
+          </div>
         ) : (
           <form onSubmit={handleSubmit}>
             <h1>Personal Information</h1>
@@ -201,7 +212,9 @@ function ContactForm() {
                     className={state.errors.email ? "error-input" : ""}
                   ></input>
                   <br />
-                  {state.errors.fullName && <small className="error">{state.errors.fullName}</small>}
+                  {state.errors.fullName && (
+                    <small className="error">{state.errors.fullName}</small>
+                  )}
                 </li>
 
                 <li>
@@ -217,11 +230,15 @@ function ContactForm() {
                     className={state.errors.email ? "error-input" : ""}
                   ></input>
                   <br />
-                  {state.errors.postcode && <small className="error">{state.errors.postcode}</small>}
+                  {state.errors.postcode && (
+                    <small className="error">{state.errors.postcode}</small>
+                  )}
                 </li>
 
                 <li>
-                  <label htmlFor="address">House/Flat Number and Street Name*</label>
+                  <label htmlFor="address">
+                    House/Flat Number and Street Name*
+                  </label>
                   <br />
                   <input
                     type="text"
@@ -233,7 +250,9 @@ function ContactForm() {
                     className={state.errors.email ? "error-input" : ""}
                   ></input>
                   <br />
-                  {state.errors.address && <small className="error">{state.errors.address}</small>}
+                  {state.errors.address && (
+                    <small className="error">{state.errors.address}</small>
+                  )}
                 </li>
 
                 <li>
@@ -249,7 +268,9 @@ function ContactForm() {
                     className={state.errors.email ? "error-input" : ""}
                   ></input>
                   <br />
-                  {state.errors.city && <small className="error">{state.errors.city}</small>}
+                  {state.errors.city && (
+                    <small className="error">{state.errors.city}</small>
+                  )}
                 </li>
               </ul>
             </fieldset>
@@ -269,7 +290,9 @@ function ContactForm() {
                     className={state.errors.email ? "error-input" : ""}
                   ></input>
                   <br />
-                  {state.errors.phoneNumber && <small className="error">{state.errors.phoneNumber}</small>}
+                  {state.errors.phoneNumber && (
+                    <small className="error">{state.errors.phoneNumber}</small>
+                  )}
                 </li>
 
                 <li>
@@ -285,19 +308,26 @@ function ContactForm() {
                     className={state.errors.email ? "error-input" : ""}
                   ></input>
                   <br />
-                  {state.errors.email && <small className="error">{state.errors.email}</small>}
+                  {state.errors.email && (
+                    <small className="error">{state.errors.email}</small>
+                  )}
                 </li>
               </ul>
             </fieldset>
-            {state.errors.errors && <div className="error">{state.errors.errors}</div>}
+            {state.errors.errors && (
+              <div className="error">{state.errors.errors}</div>
+            )}
 
             <button className="submit-btn" type="submit">
-            {state.error ? "Error" : state.submitting ? "Requesting..." : "Request Design Consultation"}
+              {Object.values(state.errors).some((error) => error !== "")
+                ? "Invalid Inputs"
+                : state.submitting
+                ? "Requesting..."
+                : "Request Design Consultation"}
             </button>
           </form>
         )}
       </div>
-      {/* ❌ from line 276 */}
     </>
   );
 }

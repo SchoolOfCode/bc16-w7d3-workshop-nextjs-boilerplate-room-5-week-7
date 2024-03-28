@@ -23,7 +23,7 @@
    - Add placeholders to inputs ✅
    - Add consultation to nav bar ✅
    - Fix email error ✅
-   - Cancel loading state, show main error message and show errors under each field if validation fails 
+   - Cancel loading state, show main error message and show errors under each field if validation fails ✅
    - Style success page
    
 
