@@ -99,7 +99,7 @@ function ContactForm() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    dispatch({ type: "submitStart" });
+    dispatch({ type: "submitBegins" });
 
     const emptyFields = Object.entries(state).filter(([key, value]) => key !== "errors" && value === "");
     if (emptyFields.length > 0) {
@@ -150,12 +150,14 @@ function ContactForm() {
 
     // Requesting...
 
+    await new Promise(resolve => setTimeout(resolve, 2000));
 
-    dispatch({ type: "submitEnd" });
+    dispatch({ type: "submitEnds" });
 
     dispatch({ type: "DONE" });
 
     dispatch({ type: "resetValue" });
+
 
     // Succesful submission
 
