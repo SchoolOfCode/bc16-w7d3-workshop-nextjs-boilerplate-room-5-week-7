@@ -4,7 +4,11 @@
 .site-header {
   grid-row: 1;
   grid-column: 1/5;
-  /* padding-left: 10px; */
+  background-color: white;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  top: 0;
 }
 
 .flex-wrapper {
@@ -17,6 +21,15 @@
 .hamburgerImg {
   width: 30px;
   height: 30px;
+  margin-right: 50px;
+  margin-top: 10px;
+}
+
+.hamburgerImgClosed {
+  width: 30px;
+  height: 30px;
+  margin-right: 15px;
+  margin-top: 10px;
 }
 
 .navbar button {
@@ -25,7 +38,7 @@
 }
 
 button:hover {
-  background-color: rgb(209, 209, 209);
+  cursor: pointer;
 }
 
 .menu-open {
@@ -67,7 +80,8 @@ ul {
 @media screen and (min-width: 1024px) {
   .desktop-links {
     display: flex;
-    margin-top: 20px;
+    margin-top: 35px;
+    margin-right: 120px;
   }
 
   .mobile-menu-toggle {

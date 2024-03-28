@@ -30,7 +30,7 @@ function Header() {
           {navbarOpen ? (
             <div className="menu-open">
               <button onClick={toggle}>
-                <Image className="hamburgerImg" src={hamburgerClosed} alt="navclosed"></Image>
+                <Image className="hamburgerImgClosed" src={hamburgerClosed} alt="navclosed"></Image>
               </button>
 
               <ul className="menuList">
