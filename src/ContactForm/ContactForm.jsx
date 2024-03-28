@@ -110,6 +110,7 @@ function ContactForm() {
           error: `${field.charAt(0).toUpperCase() + field.slice(1)} is required.`,
         });
       });
+       dispatch({ type: "submitEnds" }); 
       return;
     }
 
@@ -120,6 +121,7 @@ function ContactForm() {
         field: "email",
         error: "Invalid email address.",
       });
+      return;
     }
 
     // Validate phone number
@@ -129,6 +131,7 @@ function ContactForm() {
         field: "phoneNumber",
         error: "Invalid phone number.",
       });
+       dispatch({ type: "submitEnds" }); 
       return;
     }
 
@@ -142,6 +145,7 @@ function ContactForm() {
         field: "postcode",
         error: "Error: England, Wales, Scotland bookings only.",
       });
+       dispatch({ type: "submitEnds" }); 
       return;
     }
 
@@ -150,7 +154,7 @@ function ContactForm() {
 
     // Requesting...
     // Delay added to show requesting
-    // await new Promise(resolve => setTimeout(resolve, 1000));
+     await new Promise(resolve => setTimeout(resolve, 1000));
 
     dispatch({ type: "submitEnds" });
 
@@ -160,6 +164,7 @@ function ContactForm() {
 
     console.log(state);
 
+     dispatch({ type: "submitEnds" }); 
 
     // Succesful submission
 
@@ -287,7 +292,7 @@ function ContactForm() {
             {state.errors.errors && <div className="error">{state.errors.errors}</div>}
 
             <button className="submit-btn" type="submit">
-            {state.submitting ? "Requesting..." : "Request Design Consultation"}
+            {state.error ? "Error" : state.submitting ? "Requesting..." : "Request Design Consultation"}
             </button>
           </form>
         )}
